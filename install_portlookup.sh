@@ -34,7 +34,7 @@ cd "$parent_path"
 mode="installing"
 if [ "$#" -eq 1 ] && [ "$1" == "deinstall" ]; then
     mode="deinstalling"
-else if [ "$#" -gt 0 ]; then
+elif [ "$#" -gt 0 ]; then
     echo "Usage: $0 [deinstall]"
     exit 0
 fi
@@ -81,7 +81,7 @@ if [ "$mode" == "installing" ]; then
         echo "   Server not compiled."
     fi
 
-else if [ "$mode" == "deinstalling" ]; then
+elif [ "$mode" == "deinstalling" ]; then
 
     # Remove all client files
     echo "Installing client..."
@@ -116,3 +116,6 @@ else
     echo "Unknown mode '$mode'"
     exit -1
 fi
+
+# We're done!
+exit 0
