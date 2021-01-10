@@ -79,6 +79,7 @@ if [ "$mode" == "installing" ]; then
         echo "   Registring service..."
         systemctl daemon-reload
         systemctl enable portlookup
+        systemctl start portlookup
 
         echo "   Done"
 
@@ -104,6 +105,7 @@ elif [ "$mode" == "deinstalling" ]; then
     # Then, install the server if compiled
     echo "Installing server..."
     echo "   Stopping service..."
+    systemctl stop portlookup
     systemctl disable portlookup
 
     echo "   Removing files..."

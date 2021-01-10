@@ -58,12 +58,12 @@ $(OBJ)/%.o: $(SRC)/%.c | dirs
 ##### EXECUTABLE RULES #####
 
 # Rules to compile both portlookup executables and prepare them for install
-$(BIN)/portlookupcli: $(OBJ)/PortLookupCLI.o | dirs
+$(BIN)/portlookupctl: $(OBJ)/PortLookupCLI.o | dirs
 	$(CC) -o $@ $^ $(CC_LINK)
 $(BIN)/portlookup: $(OBJ)/PortLookupDaemon.o | dirs
 	$(CC) -o $@ $^ $(CC_LINK)
-server: $(BIN)/portlookup $(BIN)/portlookupcli
+server: $(BIN)/portlookup $(BIN)/portlookupctl
 	cp $(BIN)/portlookup $(INST)/server/portlookup
-	cp $(BIN)/portlookupcli $(INST)/server/portlookupcli
+	cp $(BIN)/portlookupctl $(INST)/server/portlookupctl
 	cp $(DATA)/portlookup.service $(INST)/server/portlookup.service
 	cp $(DATA)/portlookup.conf $(INST)/server/portlookup.conf
