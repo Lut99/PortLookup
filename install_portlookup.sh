@@ -20,10 +20,10 @@ header_dir="/usr/include"
 dynlib_dir="/usr/lib"
 
 # Define the files to install for the client & the server
-client_sources = ( "$client_dir/portlookup" "$client_dir/portlookup.h" "$client_dir/portlookup.hpp" "$client_dir/libportlookup.so" )
-client_targets = ( "$binary_dir/portlookup" "$header_dir/portlookup.h" "$header_dir/portlookup" "$dynlib_dir/libportlookup.so" )
-server_sources = ( "$server_dir/portlookup.conf" "$server_dir/portlookup" "$server_dir/portlookupctl" "$server_dir/portlookup.service" )
-server_targets = ( "$config_dir/portlookup.conf" "$daemon_dir/portlookup" "$binary_dir/portlookupctl" "$service_dir/portlookup.service" )
+client_sources=( "$client_dir/portlookup" "$client_dir/portlookup.h" "$client_dir/portlookup.hpp" "$client_dir/libportlookup.so" )
+client_targets=( "$binary_dir/portlookup" "$header_dir/portlookup.h" "$header_dir/portlookup" "$dynlib_dir/libportlookup.so" )
+server_sources=( "$server_dir/portlookup.conf" "$server_dir/portlookup" "$server_dir/portlookupctl" "$server_dir/portlookup.service" )
+server_targets=( "$config_dir/portlookup.conf" "$daemon_dir/portlookup" "$binary_dir/portlookupctl" "$service_dir/portlookup.service" )
 
 # First, make sure we're in the correct directory
 # Credits: https://stackoverflow.com/a/24112741
