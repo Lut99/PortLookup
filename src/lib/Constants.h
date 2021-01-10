@@ -4,7 +4,7 @@
  * Created:
  *   10/01/2021, 13:08:35
  * Last edited:
- *   10/01/2021, 14:03:31
+ *   10/01/2021, 17:12:02
  * Auto updated?
  *   Yes
  *
@@ -18,8 +18,10 @@
 
 /* Index in the socket list of the CLI socket. */
 #define CLI_FD 0
-/* Defines the location of the UNIX-domain socket that the CLI uses to communicate with the daemon. */
-#define CLI_SOCKET_PATH "/run/portlookup/portlookup.socket"
+/* Defines the folder where to put the UNIX-domain sockets. */
+#define CLI_SOCKET_PATH "/run/portlookup"
+/* Defines the name of the UNIX-domain socket that the CLI uses to communicate with the daemon. */
+#define CLI_SOCKET_FILE "portlookup.socket"
 /* Defines the maximum number of connections for the CLI server side. */
 #define MAX_CLI_CONNECTIONS 2
 /* The maximum length a single CLI message may have. */

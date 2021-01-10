@@ -16,6 +16,7 @@ server_dir="install/server"
 # Define the target directories
 service_dir="/lib/systemd/system"
 config_dir="/etc/portlookup"
+socket_dir="/run/portlookup"
 daemon_dir="/usr/sbin"
 binary_dir="/usr/bin"
 header_dir="/usr/include"
@@ -66,6 +67,8 @@ if [ "$mode" == "installing" ]; then
     if [ "$(ls -A $server_dir)" ]; then
         echo "   Creating configuration directory '$config_dir'..."
         mkdir -p "$config_dir"
+        echo "   Creating socket directory '$socket_dir'..."
+        mkdir -p "$socket_dir"
 
         echo "   Copying files..."
         for i in ${!server_sources[@]}; do
@@ -109,6 +112,8 @@ elif [ "$mode" == "deinstalling" ]; then
         rm -f "${server_targets[$i]}"
     done
 
+    echo "   Removing socket directory '$socket_dir'..."
+    rm -rf "$socket_dir"
     echo "   Removing configuration directory '$config_dir'..."
     rm -rf "$config_dir"
 

@@ -4,7 +4,7 @@
  * Created:
  *   10/01/2021, 12:25:45
  * Last edited:
- *   10/01/2021, 14:22:11
+ *   10/01/2021, 17:17:36
  * Auto updated?
  *   Yes
  *
@@ -29,6 +29,7 @@
 #include <poll.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <sys/stat.h>
 
 #include "Constants.h"
 
@@ -59,19 +60,19 @@ void init() {
     }
 
     // Make sure that there isn't already a socket at the given location
-    if (remove(CLI_SOCKET_PATH) == -1 && errno != ENOENT) {
-        syslog(LOG_ERR | LOG_CRIT | LOG_EMERG | LOG_ALERT, "Could not remove previous CLI socket file (" CLI_SOCKET_PATH "): %s", strerror(errno));
+    if (remove(CLI_SOCKET_PATH "/" CLI_SOCKET_FILE) == -1 && errno != ENOENT) {
+        syslog(LOG_ERR | LOG_CRIT | LOG_EMERG | LOG_ALERT, "Could not remove previous CLI socket file (" CLI_SOCKET_PATH "/" CLI_SOCKET_FILE "): %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
 
     // Prepare the "address", i.e., the file
     memset(&cli_address, 0, sizeof(struct sockaddr_un));
     cli_address.sun_family = AF_UNIX;
-    strncpy(cli_address.sun_path, CLI_SOCKET_PATH, sizeof(cli_address.sun_path) - 1);
+    strncpy(cli_address.sun_path, CLI_SOCKET_PATH "/" CLI_SOCKET_FILE, sizeof(cli_address.sun_path) - 1);
 
     // With the file out of the way and the address known, we'll bind the socket
     if (bind(sockets[CLI_FD].fd, (struct sockaddr*) &cli_address, sizeof(struct sockaddr_un)) == -1) {
-        syslog(LOG_ERR | LOG_CRIT | LOG_EMERG | LOG_ALERT, "Failed to bind CLI socket to file (" CLI_SOCKET_PATH "): %s", strerror(errno));
+        syslog(LOG_ERR | LOG_CRIT | LOG_EMERG | LOG_ALERT, "Failed to bind CLI socket to file (%s): %s", cli_address.sun_path, strerror(errno));
         exit(EXIT_FAILURE);
     }
 
