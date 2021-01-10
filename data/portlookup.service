@@ -6,5 +6,7 @@ StartLimitIntervalSec=0
 [Service]
 ExecStart=/usr/sbin/portlookup
 Type=simple
-Restart=always
-User=
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

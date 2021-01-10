@@ -12,7 +12,7 @@ BIN  := bin
 OBJ  := $(BIN)/obj
 INST := install
 DATA := data
-DIRS := $(BIN) $(OBJ) $(INST)
+DIRS := $(BIN) $(OBJ) $(INST) $(INST)/server
 
 # Includes
 INCL := -I$(LIB)
@@ -36,7 +36,8 @@ all: server client
 clean:
 	-find $(BIN) -type f ! -name "*.*" -delete
 	-find $(OBJ) -type f -name "*.o" -delete
-	-rm -rf $(INST)/*
+	-rm -rf $(INST)/client/*
+	-rm -rf $(INST)/server/*
 
 dirs:
 	mkdir -p $(DIRS)
@@ -62,5 +63,5 @@ $(BIN)/portlookupcli: $(OBJ)/PortLookupCLI.o | dirs
 $(BIN)/portlookup: $(OBJ)/PortLookupDaemon.o | dirs
 	$(CC) -o $@ $^ $(CC_LINK)
 server: $(BIN)/portlookup $(BIN)/portlookupcli
-	cp $(BIN)/portlookup $(INST)/portlookup
-	cp $(BIN)/portlookupcli $(INST)/portlookupcli
+	cp $(BIN)/portlookup $(INST)/server/portlookup
+	cp $(BIN)/portlookupcli $(INST)/server/portlookupcli
