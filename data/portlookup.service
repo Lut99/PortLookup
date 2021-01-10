@@ -1,0 +1,10 @@
+[Unit]
+Description=Service that allows client to query which port is used by a certain application.
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart=/usr/sbin/portlookup
+Type=simple
+Restart=always
+User=

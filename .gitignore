@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Just ignore everything under bin and install
+bin/*
+install/*
