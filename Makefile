@@ -12,7 +12,7 @@ BIN  := bin
 OBJ  := $(BIN)/obj
 INST := install
 DATA := data
-DIRS := $(BIN) $(OBJ) $(INST) $(INST)/server
+DIRS := $(BIN) $(OBJ) $(INST) $(INST)/server $(INST)/client
 
 # Includes
 INCL := -I$(LIB)
@@ -65,3 +65,5 @@ $(BIN)/portlookup: $(OBJ)/PortLookupDaemon.o | dirs
 server: $(BIN)/portlookup $(BIN)/portlookupcli
 	cp $(BIN)/portlookup $(INST)/server/portlookup
 	cp $(BIN)/portlookupcli $(INST)/server/portlookupcli
+	cp $(DATA)/portlookup.service $(INST)/server/portlookup.service
+	cp $(DATA)/portlookup.conf $(INST)/server/portlookup.conf
