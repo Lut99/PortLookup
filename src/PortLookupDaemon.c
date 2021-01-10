@@ -4,7 +4,7 @@
  * Created:
  *   10/01/2021, 12:25:45
  * Last edited:
- *   10/01/2021, 17:17:36
+ *   10/01/2021, 17:26:39
  * Auto updated?
  *   Yes
  *
@@ -108,6 +108,16 @@ void cleanup() {
 
 
 
+/* Function that handles incoming messages from the CLI-side. */
+void do_message(int client_fd, char* message, int message_length) {
+    if (strncmp(message, "ping", 4) == 0) {
+        // Simply send a ping back, done
+        write(client_fd, "ping", 4);
+    }
+}
+
+
+
 
 
 /***** ENTRY POINT *****/
@@ -156,7 +166,7 @@ int main() {
             }
 
             // Do actions based on that message
-            // do_message(client_fd, client_addr.sun_path, buffer, message_length);
+            do_message(client_fd, buffer, message_length);
 
             // Close the socket again
             if (close(client_fd) == -1) {
