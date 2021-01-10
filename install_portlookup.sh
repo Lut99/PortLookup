@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # INSTALL PORTLOOKUP.sh
 #   by Lut99
 #
